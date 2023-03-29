@@ -13,6 +13,10 @@ function WeatherSearch() {
     setPreviousSearches([...previousSearches, location]);
   };
 
+  const convertToFahrenheit = (celsius) => {
+    return (celsius * 9/5) + 32;
+  }
+
   return (
     <div className='weather-search'>
       <h1>Weather From</h1>
@@ -24,13 +28,13 @@ function WeatherSearch() {
       {weather && (
         <div className='current-weather'>
           <h2>Weather for {weather.nearest_area[0].areaName[0].value}</h2>
-          <p>Current temperature: {weather.current_condition[0].temp_F} °F</p>
+          <p>Current temperature: {weather.current_condition[0].temp_C} °C/{convertToFahrenheit(weather.current_condition[0].temp_C)}°F</p>
           <p>Current weather: {weather.current_condition[0].weatherDesc[0].value}</p>
           <h3>Forecast</h3>
           <ul>
             {weather.weather.map((item, index) => (
               <li key={index}>
-                {item.date} - Low: {item.mintempF} °F, High: {item.maxtempF} °F, {item.hourly[0].weatherDesc[0].value}
+                {item.date} - Low: {item.mintempC} °C/{convertToFahrenheit(item.mintempC)}°F, High: {item.maxtempC} °C/{convertToFahrenheit(item.maxtempC)}°F, {item.hourly[0].weatherDesc[0].value}
               </li>
             ))}
           </ul>
@@ -47,3 +51,5 @@ function WeatherSearch() {
 }
 
 export default WeatherSearch;
+
+

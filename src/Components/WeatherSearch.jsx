@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './WeatherSearch.css'
 
 function WeatherSearch() {
   const [location, setLocation] = useState('');
@@ -13,7 +14,7 @@ function WeatherSearch() {
   };
 
   return (
-    <div>
+    <div className='weather-search'>
       <h1>Weather From</h1>
       <label>
         Enter a location:
@@ -21,7 +22,7 @@ function WeatherSearch() {
       </label>
       <button onClick={fetchWeather}>Search</button>
       {weather && (
-        <div>
+        <div className='current-weather'>
           <h2>Weather for {weather.nearest_area[0].areaName[0].value}</h2>
           <p>Current temperature: {weather.current_condition[0].temp_F} °F</p>
           <p>Current weather: {weather.current_condition[0].weatherDesc[0].value}</p>
@@ -36,7 +37,7 @@ function WeatherSearch() {
         </div>
       )}
       <h2>Previous Searches:</h2>
-      <ul>
+      <ul className='previous-search'>
         {previousSearches.map((search, index) => (
           <li key={index}>{search}</li>
         ))}
